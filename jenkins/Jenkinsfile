@@ -1,0 +1,47 @@
+pipeline {
+    agent { label 'docker' }
+    
+    options {
+        timestamps()
+        disableConcurrentBuilds()
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+        
+        stage('Permissions') {
+            steps {
+                sh 'chmod +x scripts/*.sh'
+            }
+        }
+        
+        stage('Start stack') {
+            steps {
+            sh 'docker compose up -d --build app_blue app_green nginx'
+            sh 'docker compose ps'
+            }
+        }
+
+        stage('Deploy with gate + rollback') {
+            steps {
+                sh '''
+                 test -x ./scripts/deploy.sh || { echo "deploy.sh not found or not executable"; exit 1; }
+                 ./scripts/deploy.sh
+                '''
+            }
+        }
+    }
+    
+    post {
+        always {
+            sh '''
+                echo "Final active version:"
+                docker compose exec -T nginx sh -lc "curl -s http://localhost/version; echo" || true
+            '''
+        }
+    }
+
+}

@@ -12,3 +12,5 @@ node_modules/
 
 # OS
 .DS_Store
+# Added by ggshield
+.cache_ggshield
