@@ -1,0 +1,8 @@
+services:
+  app_blue:
+    ports:
+      - "3101:3000"
+
+  app_green: 
+    ports:
+      - "3102:3000"
