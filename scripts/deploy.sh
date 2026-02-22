@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+PROJECT_NAME="${COMPOSE_PROJECT_NAME:-cd-bluegreen}"
+DC="docker compose -p ${PROJECT_NAME}"
+
 echo "Deploy: switching to GREEN"
 ./scripts/switch.sh green
 
@@ -12,5 +15,5 @@ if ! ./scripts/healthcheck.sh http://localhost:8080/health; then
 fi
 
 echo "Deploy OK. GREEN is now live."
-curl -s http://localhost:8080/version
-echo
+echo "Active version:"
+$DC exec -T nginx sh -lc 'curl -s http://localhost/version; echo'

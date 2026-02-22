@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Forzamos el "project name" de Docker Compose (misma pila siempre)
+PROJECT_NAME="${COMPOSE_PROJECT_NAME:-cd-bluegreen}"
+DC="docker compose -p ${PROJECT_NAME}"
+
 TARGET="${1:-}"
 
 if [[ "$TARGET" != "blue" && "$TARGET" != "green" ]]; then
@@ -29,16 +33,17 @@ EOF
 fi
 
 echo "Reloading Nginx..."
-docker compose exec nginx nginx -s reload
+# -T para que no intente modo interactivo en Jenkins
+$DC exec -T nginx nginx -s reload
 
 echo "Upstream on host:"
 cat "$UPSTREAM_FILE"
 echo
 
 echo "Upstream inside container:"
-docker compose exec nginx cat /etc/nginx/conf.d/upstream.conf
+$DC exec -T nginx cat /etc/nginx/conf.d/upstream.conf
 echo
 
 echo "Active now (via nginx container):"
-docker compose exec -T nginx sh -lc 'curl -s http://localhost/version; echo'
+$DC exec -T nginx sh -lc 'curl -s http://localhost/; echo'
 echo

@@ -1,5 +1,9 @@
 pipeline {
     agent { label 'docker' }
+
+    environment {
+       COMPOSE_PROJECT_NAME = "cd-bluegreen"
+    }
     
     options {
         timestamps()
@@ -20,8 +24,10 @@ pipeline {
         
         stage('Start stack') {
             steps {
-            sh 'docker compose up -d --build app_blue app_green nginx'
-            sh 'docker compose ps'
+                sh '''
+                  docker compose -p "$COMPOSE_PROJECT_NAME" up -d --build app_blue app_green nginx
+                  docker compose -p "$COMPOSE_PROJECT_NAME" ps
+                '''
             }
         }
 
@@ -38,8 +44,18 @@ pipeline {
     post {
         always {
             sh '''
-                echo "Final active version:"
-                docker compose exec -T nginx sh -lc "curl -s http://localhost/version; echo" || true
+                echo "Final active version (via nginx container):"
+                docker compose -p "$COMPOSE_PROJECT_NAME" exec -T nginx sh -lc 'curl -s http://localhost/version; echo' || true
+
+                echo "Compose status:"
+                docker compose -p "$COMPOSE_PROJECT_NAME" ps || true
+            '''
+        }
+
+        cleanup {
+            sh '''
+                echo "Cleaning up stack..."
+                docker compose -p "$COMPOSE_PROJECT_NAME" down --volumes --remove-orphans || true
             '''
         }
     }
