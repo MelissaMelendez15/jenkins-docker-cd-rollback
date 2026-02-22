@@ -43,6 +43,8 @@ services:
       - JENKINS_URL=http://jenkins:8080
       - JENKINS_AGENT_NAME=agent-docker
       - JENKINS_SECRET=8b6748e445d697575a98cd0eb4ff3e075fb86b3452c80e1d1728beeac427972c
+    group_add:
+      - "125"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
