@@ -4,12 +4,14 @@ services:
     environment:
       - APP_VERSION=1.0.0
       - PORT=3000
-  app_green: 
+
+  app_green:
     build: ./app
     environment:
       - APP_VERSION=2.0.0
       - PORT=3000
       - HEALTH_FAIL=true
+
   nginx:
     image: nginx:alpine
     ports:
@@ -20,7 +22,7 @@ services:
     depends_on:
       - app_blue
       - app_green
-  
+
   jenkins:
     image: jenkins/jenkins:lts-jdk17
     ports:
@@ -29,7 +31,7 @@ services:
     volumes:
       - jenkins_home:/var/jenkins_home
     restart: unless-stopped
-  
+
   agent_docker:
     build:
       context: .
@@ -42,9 +44,10 @@ services:
       - "125"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - /home/vant/Documentos/jenkins-docker-cd-rollback:/home/jenkins/agent/workspace/cd-bluegreen-rollback
     depends_on:
       - jenkins
     restart: unless-stopped
-  
+
 volumes:
   jenkins_home:
