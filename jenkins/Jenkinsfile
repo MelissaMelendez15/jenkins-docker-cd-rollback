@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'docker' }
+    agent { label 'agent-docker' }
 
     environment {
        COMPOSE_PROJECT_NAME = "cd-bluegreen"
