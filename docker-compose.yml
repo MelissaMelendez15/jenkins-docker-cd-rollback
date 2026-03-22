@@ -48,7 +48,6 @@ services:
     depends_on:
       - jenkins
     restart: unless-stopped
-
 volumes:
   jenkins_home:
 
