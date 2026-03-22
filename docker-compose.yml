@@ -44,7 +44,7 @@ services:
       - "125"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /home/vant/Documentos/jenkins-docker-cd-rollback:/home/jenkins/agent/workspace/cd-bluegreen-rollback
+      - /home/vant/jenkins-agent-workspace:/home/jenkins/agent/workspace
     depends_on:
       - jenkins
     restart: unless-stopped
