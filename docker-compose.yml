@@ -39,7 +39,7 @@ services:
     environment:
       - JENKINS_URL=http://jenkins:8080
       - JENKINS_AGENT_NAME=agent-docker
-      - JENKINS_SECRET=4ad2f945f778e7dc61a0152ad95493013346651979b1d0cb0447e2b41836ff3a
+      - JENKINS_SECRET=f821f660253a1a8303d09dbf60d63253c47ec9158933ca8ab7f4255119304125
     group_add:
       - "125"
     volumes:
@@ -51,3 +51,5 @@ services:
 
 volumes:
   jenkins_home:
+
+  
