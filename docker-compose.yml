@@ -45,6 +45,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /home/vant/jenkins-agent-workspace:/home/jenkins/agent/workspace
+      - /home/vant/jenkins-agent-workspace:/home/vant/jenkins-agent-workspace
     depends_on:
       - jenkins
     restart: unless-stopped

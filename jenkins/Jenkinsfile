@@ -1,5 +1,10 @@
 pipeline {
-    agent { label 'agent-docker' }
+    agent { 
+         node {
+            label 'agent-docker'
+            customWorkspace '/home/vant/jenkins-agent-workspace/cd-bluegreen-rollback'
+        }
+   }
 
     environment {
        COMPOSE_PROJECT_NAME = "jenkins-docker-cd-rollback"
