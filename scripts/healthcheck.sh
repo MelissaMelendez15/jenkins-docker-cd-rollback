@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-PROJECT_NAME="${COMPOSE_PROJECT_NAME:-cd-bluegreen}"
+PROJECT_NAME="${COMPOSE_PROJECT_NAME:-jenkins-docker-cd-rollback}"
 DC="docker compose -p ${PROJECT_NAME}"
 
 # Si pasas URL (modo local/host), hace curl directo.

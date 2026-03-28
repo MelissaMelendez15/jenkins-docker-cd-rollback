@@ -1,5 +1,6 @@
 # VSCode
 .vscode/
+ nginx/upstream.conf
 
 # Node
 node_modules/

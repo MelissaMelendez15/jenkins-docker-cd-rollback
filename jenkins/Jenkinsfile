@@ -2,7 +2,7 @@ pipeline {
     agent { label 'agent-docker' }
 
     environment {
-       COMPOSE_PROJECT_NAME = "cd-bluegreen"
+       COMPOSE_PROJECT_NAME = "jenkins-docker-cd-rollback"
     }
     
     options {
@@ -44,8 +44,8 @@ pipeline {
     post {
         always {
             sh '''
-                echo "Final active version (via nginx container):"
-                docker compose -p "$COMPOSE_PROJECT_NAME" exec -T nginx sh -lc 'curl -s http://localhost/version; echo' || true
+                echo "Final active version:"
+                docker run --rm --network "${COMPOSE_PROJECT_NAME}_default" curlimages/curl:8.7.1 -fsS http://nginx/version || true
 
                 echo "Compose status:"
                 docker compose -p "$COMPOSE_PROJECT_NAME" ps || true
@@ -55,7 +55,7 @@ pipeline {
         cleanup {
             sh '''
                 echo "Cleaning up stack..."
-                docker compose -p "$COMPOSE_PROJECT_NAME" down --volumes --remove-orphans || true
+                docker compose -p "$COMPOSE_PROJECT_NAME" stop app_blue app_green nginx || true
             '''
         }
     }
