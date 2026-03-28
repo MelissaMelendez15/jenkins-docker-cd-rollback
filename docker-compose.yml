@@ -10,7 +10,7 @@ services:
     environment:
       - APP_VERSION=2.0.0
       - PORT=3000
-      - HEALTH_FAIL=true
+      #- HEALTH_FAIL=true
 
   nginx:
     image: nginx:alpine
