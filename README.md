@@ -72,6 +72,21 @@ De esta forma, una release defectuosa nunca permanece activa.
 5. Si falla → rollback automático a la versión blue
 
 
+## ✅ Evidencia del pipeline
+
+La siguiente ejecución muestra el comportamiento esperado cuando la versión green falla el healthcheck: el pipeline detecta el error y ejecuta rollback automático a blue.
+
+### Ejecución con fallo y rollback automático
+
+![Pipeline con rollback](docs/images/jenkins-pipeline-rollback.png)
+
+En esta segunda ejecución, la nueva versión supera el healthcheck y la promoción se completa correctamente.
+
+### Ejecución correcta sin error en la nueva versión
+
+![Pipeline exitoso](docs/images/jenkins-pipeline-success.png)
+
+
 ## 🎯 Valor
 
 Este enfoque permite:
