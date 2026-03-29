@@ -14,8 +14,10 @@ Este proyecto muestra una solución sencilla pero efectiva para reducir ese ries
 - Validación mediante healthcheck
 - Rollback automático en caso de fallo
 
+
 ## 🏗 Arquitectura
 ![Blue/Green Deployment](docs/images/cd-bluegreen-architecture.png)
+
 
 ## ⚙️ Funcionamiento
 
@@ -35,7 +37,9 @@ Este proyecto muestra una solución sencilla pero efectiva para reducir ese ries
 
 De esta forma, una release defectuosa nunca permanece activa.
 
+
 ## 📁 Estructura del proyecto
+```
 .
 ├── app/# Aplicación Node.js
 ├── nginx/# Configuración de Nginx
@@ -44,6 +48,7 @@ De esta forma, una release defectuosa nunca permanece activa.
 │   └── images/# Diagramas y recursos visuales
 ├── docker-compose.yml
 └── Jenkinsfile
+```
 
 
 ## 🧩 Componentes clave
@@ -56,6 +61,7 @@ De esta forma, una release defectuosa nunca permanece activa.
 - **switch.sh** → Actualiza el backend activo en Nginx
 - **rollback.sh** → Restaura la versión anterior
 - **Healthcheck container** → Valida la release a través del flujo real de tráfico
+
 
 ## 🔄 Flujo de despliegue
 
@@ -75,6 +81,7 @@ Este enfoque permite:
 - Reducir el tiempo de recuperación (MTTR)
 - Aumentar la confianza en el pipeline
 
+
 ## ▶️ Ejecución
 
 ```bash
@@ -82,8 +89,6 @@ docker compose up --build
 
 
 ---
-
-## 🟢 10. Notas finales
 
 ## 💡 Notas
 
@@ -96,6 +101,7 @@ Se puede extender con:
 - Integración con entornos reales
 
 ---
+```
 
 ## 👩‍💻 Autor
 
