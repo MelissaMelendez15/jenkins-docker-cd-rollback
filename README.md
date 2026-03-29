@@ -36,15 +36,15 @@ Este proyecto muestra una solución sencilla pero efectiva para reducir ese ries
 De esta forma, una release defectuosa nunca permanece activa.
 
 ## 📁 Estructura del proyecto
-
 .
-├── app/                # Aplicación Node.js
-├── nginx/              # Configuración de Nginx
-├── scripts/            # Lógica de deploy, healthcheck, rollback y switch
+├── app/# Aplicación Node.js
+├── nginx/# Configuración de Nginx
+├── scripts/# Lógica de deploy, healthcheck, rollback y switch
 ├── docs/
-│   └── images/         # Diagramas y recursos visuales
+│   └── images/# Diagramas y recursos visuales
 ├── docker-compose.yml
 └── Jenkinsfile
+
 
 ## 🧩 Componentes clave
 
@@ -85,7 +85,6 @@ docker compose up --build
 
 ## 🟢 10. Notas finales
 
-```markdown
 ## 💡 Notas
 
 Esta es una implementación simplificada enfocada en demostrar el concepto de despliegue controlado con rollback automático.
@@ -96,5 +95,8 @@ Se puede extender con:
 - Canary deployments
 - Integración con entornos reales
 
-                            ---
-                            Hecho con ❤️ por Melissa Melendez · DevOps & Cloud
+---
+
+## 👩‍💻 Autor
+
+Hecho con ❤️ por Melissa Melendez · DevOps & Cloud
