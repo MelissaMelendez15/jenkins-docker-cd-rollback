@@ -71,6 +71,7 @@ De esta forma, una release defectuosa nunca permanece activa.
 4. Si es correcto → la versión green se mantiene activa
 5. Si falla → rollback automático a la versión blue
 
+
 ## 🎯 Valor
 
 Este enfoque permite:
@@ -86,7 +87,6 @@ Este enfoque permite:
 
 ```bash
 docker compose up --build
-
 
 ---
 
